@@ -7,7 +7,6 @@ class Tic
     end
 
     def perform
-        puts "YOLO"
+        @my_game.game_loop
     end
 end
-    

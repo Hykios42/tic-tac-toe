@@ -1,5 +1,7 @@
 class Joueur
-    attr_accessor       :name
+    attr_accessor       :name, :char
+    
+    @@nb_user = 0
 
     @@player_list = []
 
@@ -10,6 +12,8 @@ class Joueur
         if player_name_empty
             @@player_list << self
         end
+        @@nb_user += 1
+        set_player_char
     end
 
     def get_user_name
@@ -25,6 +29,14 @@ class Joueur
         else
             puts "Pseudo OK"
             return true
+        end
+    end
+
+    def set_player_char
+        if @@nb_user == 1
+            self.char = "X"
+        else 
+            self.char = "O"
         end
     end
 end
