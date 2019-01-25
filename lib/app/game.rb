@@ -53,7 +53,6 @@ class Game
     end
 
     def play_one_user(obj_player, obj_board, obj_print,obj_game)
-        # PUIS CA
         puts "#{obj_player.name} à toi ! quel case veut-tu jouer ? (format : a1 / a2 / a3 / etc...)"
         player_1_entry = gets.chomp
         if obj_board.already_a_char(obj_board.board_case, player_1_entry) == false
@@ -63,12 +62,54 @@ class Game
             obj_board.board_edit(player_1_entry, obj_player)
             obj_print.print_board(obj_board.board_case)
             turn_up
-
+            victory(obj_board.get_board_case)
         end
-            
+
     end
 
-    def set_board_full
-        @board_full = true 
+    def set_victoire
+        @victoire = true
+    end
+
+    def victory(board_case)
+        if check_line(board_case) == true || check_column(board_case) == true  || check_diagonal(board_case) == true
+            @victoire = true
+        end
+    end
+
+    def check_line(board_case)
+        if (board_case["a1"] == "X" && board_case["a2"] == "X" && board_case["a3"] == "X") || (board_case["a1"] == "O" && board_case["a2"] == "O" && board_case["a3"] == "O")
+            puts "VICTOIRE !"
+            return true
+        elsif  (board_case["b1"] == "X" && board_case["b2"] == "X" && board_case["b3"] == "X") || (board_case["b1"] == "O" && board_case["b2"] == "O" && board_case["b3"] == "O")
+            puts "VICTOIRE !"
+            return true
+        elsif  (board_case["c1"] == "X" && board_case["c2"] == "X" && board_case["c3"] == "X") || (board_case["c1"] == "O" && board_case["c2"] == "O" && board_case["c3"] == "O")
+            puts "Victoire !"
+            return true 
+        end
+    end
+
+    def check_column(board_case)
+        if (board_case["a1"] == "X" && board_case["b1"] == "X" && board_case["c1"] == "X") || (board_case["a1"] == "O" && board_case["b1"] == "O" && board_case["c1"] == "O")
+            puts "VICTOIRE !"
+            return true
+        elsif  (board_case["a2"] == "X" && board_case["b2"] == "X" && board_case["c2"] == "X") || (board_case["a2"] == "O" && board_case["b2"] == "O" && board_case["c2"] == "O")
+            puts "VICTOIRE !"
+            return true
+        elsif  (board_case["a3"] == "X" && board_case["b3"] == "X" && board_case["c3"] == "X") || (board_case["a3"] == "O" && board_case["b3"] == "O" && board_case["c3"] == "O")
+            puts "Victoire !"
+            return true 
+        end
+    end
+
+    def check_diagonal(board_case)
+        if (board_case["a1"] == "X" && board_case["b2"] == "X" && board_case["c3"] == "X") || (board_case["a1"] == "O" && board_case["b2"] == "O" && board_case["c3"] == "O")
+            puts "VICTOIRE !"
+            return true
+        elsif (board_case["c1"] == "X" && board_case["b2"] == "X" && board_case["a3"] == "X") || (board_case["c1"] == "O" && board_case["b2"] == "O" && board_case["a3"] == "O")
+            puts "VICTOIRE !"
+            return true
+        end
     end
 end

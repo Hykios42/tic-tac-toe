@@ -21,4 +21,7 @@ class Board
         end
     end
 
+    def get_board_case
+        return @board_case
+    end
 end
