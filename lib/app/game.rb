@@ -13,10 +13,8 @@ class Game
         puts "Création d'une partie"
         @my_print = Printing.new
         @joueur_1 = Joueur.new
-      #  @joueur_1.player_name_empty
         puts "Bienvenue  #{@joueur_1.name}"
         @joueur_2 = Joueur.new
-       # @joueur_2.player_name_empty
         puts "Bienvenue  #{@joueur_2.name}"
         @my_board = Board.new
         puts "Partie configurer !"
@@ -30,8 +28,10 @@ class Game
         @my_print.print_board(@my_board.board_case)
         while @board_full != true && @victoire != true
             play_one_user(@joueur_1, @my_board, @my_print, self)
+            victory(@my_board.get_board_case)
             if end_9_turn != true
                 play_one_user(@joueur_2, @my_board, @my_print, self)
+                victory(@my_board.get_board_case)
             else
                 @board_full = true
             end
@@ -40,10 +40,13 @@ class Game
     end
     
 
+    # compte des tours jouers 
     def turn_up
         @turn += 1
     end
 
+
+    # ça c'est pour voir si le board est plein
     def end_9_turn
         if @turn == 9
             puts "Fin de partie"
@@ -62,21 +65,19 @@ class Game
             obj_board.board_edit(player_1_entry, obj_player)
             obj_print.print_board(obj_board.board_case)
             turn_up
-            victory(obj_board.get_board_case)
         end
 
     end
 
-    def set_victoire
-        @victoire = true
-    end
-
+    # test des victoires imbriqué 
     def victory(board_case)
         if check_line(board_case) == true || check_column(board_case) == true  || check_diagonal(board_case) == true
-            @victoire = true
+            return @victoire = true
         end
     end
 
+
+    # A PARTIR DE LA C'EST SALE ... DESO PAS DESO J'AI PAS LE TEMPS LA
     def check_line(board_case)
         if (board_case["a1"] == "X" && board_case["a2"] == "X" && board_case["a3"] == "X") || (board_case["a1"] == "O" && board_case["a2"] == "O" && board_case["a3"] == "O")
             puts "VICTOIRE !"

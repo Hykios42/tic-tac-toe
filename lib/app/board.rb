@@ -11,12 +11,12 @@ class Board
         @board_case[playerEntry] = playerID.char
     end
 
+    # check si il y a un X ou un O dans le board, si elle contient un " " c'est quel est valide
     def already_a_char(board_case, case_to_check)
         if board_case[case_to_check] != " "
             puts "la case est déjà prise, bien essayer !"
             return false
         else
-            puts "La case est valide"
             return true
         end
     end

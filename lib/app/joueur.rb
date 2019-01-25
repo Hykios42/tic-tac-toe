@@ -27,11 +27,11 @@ class Joueur
             @name = get_user_name
             return false
         else
-            puts "Pseudo OK"
             return true
         end
     end
 
+    # set le charactère par défaut des joueurs
     def set_player_char
         if @@nb_user == 1
             self.char = "X"

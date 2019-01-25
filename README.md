@@ -13,7 +13,7 @@ Tu peux lancer le programme , il va d'abord initialiser les instance de class n�
 
 ensuite enjoy 
 
-pour la condition de victoire , elle est vérifié mais elle ne propose pas pour le moment (a 3H40) de relancer une game où de quitter 
+pour la condition de victoire , elle est vérifié mais elle ne propose pas pour le moment (a 3H40) de relancer une game où de quitter (EDIT , si tu joue un tour de plus le programme s'arrete)
 
 
 Des bisous en espérant que je soit lever pour la correction <3
