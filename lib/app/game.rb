@@ -4,10 +4,9 @@ require 'printing'
 
 class Game
 
-    attr_accessor       :board_full, :turn
+    attr_accessor       :board_full, :turn, :victoire
 
     @@number_games = 0
-    @@victoire = false
 
     
     def initialize
@@ -23,25 +22,34 @@ class Game
         puts "Partie configurer !"
         puts "#{@joueur_1.name} VS #{@joueur_2.name}"
         @board_full = false
+        @victoire = false
         @turn = 0
     end
 
     def game_loop
         @my_print.print_board(@my_board.board_case)
-        while @board_full != true 
+        while @board_full != true && @victoire != true
             play_one_user(@joueur_1, @my_board, @my_print, self)
-            play_one_user(@joueur_2, @my_board, @my_print, self)
+            if end_9_turn != true
+                play_one_user(@joueur_2, @my_board, @my_print, self)
+            else
+                @board_full = true
+            end
         end
 
     end
     
 
-    def end_9_turn(obj_game)
-        if @turn == 9
-            puts "=" * 10 + " FIN DE LA PARTIE: EGALITE " + "=" * 10
-            obj_game.set_board_full = set_board_full
-        end
+    def turn_up
         @turn += 1
+    end
+
+    def end_9_turn
+        if @turn == 9
+            puts "Fin de partie"
+            puts "Egalite"
+            return true
+        end
     end
 
     def play_one_user(obj_player, obj_board, obj_print,obj_game)
@@ -54,12 +62,11 @@ class Game
         else
             obj_board.board_edit(player_1_entry, obj_player)
             obj_print.print_board(obj_board.board_case)
-            
-            obj_game.end_9_turn(obj_game)
+            turn_up
+
         end
+            
     end
-
-
 
     def set_board_full
         @board_full = true 
